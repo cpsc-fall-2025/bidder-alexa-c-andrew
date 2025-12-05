@@ -46,23 +46,52 @@ void GenerateBids(int rounds, int budget, std::string output_filename) {
 
   std::ofstream output{output_filename};
 
-  int third_of_rounds = rounds / 3;
-  int remaining_rounds = rounds % 3;
+  //we want to divide the rounds into different thirds and any remaining rounds
+  //will be placed in the middle set of rounds
+  int third_of_rounds {rounds / 3};
+  int remaining_rounds {rounds % 3};
 
+  //since the thirds are equal to one another. We need to mulitply them by their
+  //repective section
+  //first is 1
+  //middle is 2
+  //last is 3
+  int first_third {third_of_rounds};
+  int middle_third {third_of_rounds * 2 + remaining_rounds};
+  int last_third {third_of_rounds * 3};
+
+  std::cout << first_third << '\n' << middle_third << '\n' << last_third << '\n';
+
+  //since the budget will move around, we have to make a temperary budget
+  //to make sure we don't go over the total budget
   int new_budget{budget};
+  int const total_budget{budget};
 
 
-  for (int i = 0; i <= rounds; i++) {
-  int bid{0};
-  if (i < third_of_rounds) {
-    bid = 0;
-    output << bid;
-  }
+  for (int round{1}; round <= rounds; round++) {
+  std::cout << round;
 
-  if (i > )
+    int bid{0};
+    if (round <= first_third) {
+      std::cout << " first" << '\n';
+      //bid = 0;
+      //output << bid << '\n';
+      continue;
+    }
+
+    if (round <= middle_third){
+      std::cout << " second" << '\n';
+
+      continue;
+    } else {
+      std::cout << " third" << '\n';
+    }
 
 
-  new_budget = new_budget - bid;
+
+
+
+
   }
 }
 
@@ -75,6 +104,13 @@ int main() {
   // You can write code here to call your functions and see if they work.
   // Example:
   // GenerateBids(10, 100, "test_output.txt");
+  GenerateBids(10,100,"test_output.txt");
+  std::cout << '\n';
+  GenerateBids(9,100,"test_output.txt");
+  std::cout << '\n';
+  GenerateBids(11,100,"test_output.txt");
+  std::cout << '\n';
+  GenerateBids(12,100,"test_output.txt");
 
   return 0;
 }
